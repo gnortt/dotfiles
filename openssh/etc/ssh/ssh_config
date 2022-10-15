@@ -1,0 +1,5 @@
+Host *
+    ServerAliveInterval 60
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    StrictHostKeyChecking accept-new
