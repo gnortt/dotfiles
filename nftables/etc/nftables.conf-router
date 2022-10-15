@@ -1,0 +1,43 @@
+#!/usr/bin/nft -f
+
+flush ruleset
+
+table inet filter {
+  chain input {
+    type filter hook input priority 0
+    policy drop
+
+    iifname lo accept
+    ct state { established, related } accept
+    ct state { invalid } drop
+
+    icmp type echo-request accept
+    ip6 nexthdr icmpv6 accept
+
+    iifname "enp1s0" udp dport { dhcpv6-client } accept
+    iifname "enp2s0" tcp dport { 22 } accept
+    iifname "enp2s0" udp dport { 53, 67, 68, 123 } accept
+  }
+
+  chain forward {
+    type filter hook forward priority 0
+    policy drop
+
+    iifname "enp2s0" oifname "enp1s0" accept
+    iifname "enp1s0" oifname "enp2s0" ct state { established, related } accept
+  }
+
+  chain output {
+    type filter hook output priority 0
+    policy accept
+  }
+}
+
+table ip nat {
+  chain POSTROUTING {
+    type nat hook postrouting priority srcnat
+    policy accept
+
+    oifname "enp1s0" masquerade
+  }
+}
