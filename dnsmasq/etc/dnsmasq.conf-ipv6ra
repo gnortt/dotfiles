@@ -1,0 +1,27 @@
+bind-interfaces
+no-resolv
+no-poll
+
+interface=enp2s0
+
+server=8.8.8.8
+server=2001:4860:4860::8888
+
+enable-ra
+
+dhcp-authoritative
+domain-needed
+bogus-priv
+localise-queries
+
+dhcp-range=lan,10.0.0.100,10.0.0.250,255.255.255.0,24h
+dhcp-option=lan,option:router,10.0.0.1
+dhcp-option=lan,option:dns-server,10.0.0.1
+dhcp-option=lan,option:ntp-server,10.0.0.1
+
+dhcp-range=lan,::1,constructor:enp2s0,ra-names,ra-stateless,24h
+dhcp-option=lan,option6:dns-server,[<server IPv6 address>]
+dhcp-option=lan,option6:ntp-server,[<server IPv6 address>]
+
+dhcp-leasefile=/var/tmp/dnsmasq.leases
+#conf-file=/etc/dnsmasq.hosts
