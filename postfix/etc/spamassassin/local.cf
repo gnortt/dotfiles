@@ -1,0 +1,10 @@
+add_header all Status _YESNO_, score=_SCORE_ required=_REQD_ autolearn=_AUTOLEARN_
+
+required_score 5.0
+
+report_safe 0
+use_bayes 1
+bayes_auto_learn 1
+
+ifplugin Mail::SpamAssassin::Plugin::Shortcircuit
+endif # Mail::SpamAssassin::Plugin::Shortcircuit

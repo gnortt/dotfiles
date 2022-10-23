@@ -1,0 +1,4 @@
+postmaster: root
+admin: user
+root: user
+nobody: user

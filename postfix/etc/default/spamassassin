@@ -1,0 +1,4 @@
+ENABLED=1
+OPTIONS="--username=debian-spamd --create-prefs --max-children 2 --helper-home-dir"
+PIDFILE="/var/run/spamd.pid"
+CRON=1

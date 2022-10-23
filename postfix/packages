@@ -1,0 +1,6 @@
+postfix
+postfix-pcre
+sasl2-bin
+opendkim
+spamassassin
+spamc
