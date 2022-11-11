@@ -1,0 +1,25 @@
+[user]
+    name =
+    email =
+    signingkey =
+
+[commit]
+    gpgsign = true
+
+[core]
+    excludesfile = ~/.gitignore
+
+[checkout]
+     defaultRemote = origin
+
+[init]
+    defaultBranch = master
+
+[pull]
+    rebase = false
+
+[color]
+    ui = auto
+
+[gpg]
+    program = gpg
