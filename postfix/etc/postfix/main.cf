@@ -6,7 +6,7 @@ smtpd_helo_required = yes
 biff = no
 
 myhostname = <fqdn>
-mydestination = <fqdm>, localhost.localdomain, localhost
+mydestination = <fqdn>, localhost.localdomain, localhost
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128, <IPv4 address>
 inet_interfaces = all
 
