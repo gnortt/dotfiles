@@ -1,0 +1,28 @@
+server {
+    server_name www.<fqdn>;
+    return 301 http://$server_name$request_uri?;
+}
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name <fqdn>;
+    root /var/www/html;
+    index index.html;
+
+    if ($host = 'www.<fqdn>') {
+        rewrite ^(.*)$ http://<fqdn>$request_uri? permanent;
+    }
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    error_page 403 404 502 503 504 /;
+
+    location = /robots.txt { access_log off; log_not_found off; }
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location ~ /\. { access_log off; log_not_found off; deny all; }
+    location ~ ~$ { access_log off; log_not_found off; deny all; }
+}

@@ -1,0 +1,22 @@
+upstream service {
+    server localhost:8888;
+}
+
+server {
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    ssl_certificate /path/to/certificate.pem;
+    ssl_certificate_key /path/to/key.pem;
+    ssl_dhparam /path/to/dhparam.pem
+
+    server_name _;
+    root /var/www/html;
+    index index.html;
+
+    location / {
+        proxy_pass http://service;
+        proxy_set_header X-Script-Name /;
+        proxy_set_header Host $host;
+    }
+}
