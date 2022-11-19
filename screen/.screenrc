@@ -1,5 +1,0 @@
-encoding UTF-8
-startup_message off
-vbell off
-term rxvt-unicode-256color
-scrollback 5000
