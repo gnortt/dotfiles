@@ -1,5 +1,5 @@
 upstream service {
-    server localhost:8888;
+    server localhost:<port>;
 }
 
 server {

@@ -12,24 +12,25 @@ server {
 
     ssl_certificate /path/to/certificate.pem;
     ssl_certificate_key /path/to/key.pem;
-    ssl_dhparam /path/to/dhparam.pem
+    ssl_dhparam /path/to/dhparam.pem;
 
     add_header Strict-Transport-Security max-age=31536000;
     add_header X-Frame-Options SAMEORIGIN;
 
     server_name <fqdn>;
-    root /var/www/html;
-    index index.html;
+    root /usr/share/nginx/html;
 
     if ($host = 'www.<fqdn>') {
-        rewrite ^(.*)$ https://<fqdn>$request_uri? permanent;
+        rewrite ^(.*)$ http://<fqdn>$request_uri? permanent;
     }
 
     location / {
         try_files $uri $uri/ =404;
+        index index.html;
     }
 
-    error_page 403 404 502 503 504 /;
+    error_page 404 /;
+    error_page 403 502 503 504 /;
 
     location = /robots.txt { access_log off; log_not_found off; }
     location = /favicon.ico { access_log off; log_not_found off; }
