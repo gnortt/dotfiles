@@ -18,7 +18,7 @@ server {
     add_header X-Frame-Options SAMEORIGIN;
 
     server_name <fqdn>;
-    root /usr/share/nginx/html;
+    root /var/www/html;
 
     if ($host = 'www.<fqdn>') {
         rewrite ^(.*)$ http://<fqdn>$request_uri? permanent;
