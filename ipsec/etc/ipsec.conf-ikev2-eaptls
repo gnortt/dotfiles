@@ -1,28 +1,22 @@
 config setup
 
-conn ios
-  auto=add
+conn peer2peer
+  auto=route
   compress=no
   type=tunnel
   keyexchange=ikev2
   fragmentation=yes
-  forceencaps=yes
   ike=chacha20poly1305-sha384-curve25519-prfsha384
   esp=chacha20poly1305-sha384
-  dpdaction=clear
-  dpddelay=300s
-  rekey=no
+  dpdaction=restart
 
-  left=%any
-  leftsubnet=0.0.0.0/0
-  leftid=<server IPv4 address>
-  leftsendcert=always
-  leftcert=<server certificate file>
+  left=<local IPv4 address>
+  leftsubnet=<local IPv4 subnet>/24
   leftauth=pubkey
+  leftid="<local cn>"
+  leftcert=/etc/ipsec.d/certs/<server certificate file>
 
-  right=%any
-  rightauth=eap-tls
-  rightsendcert=never
-  rightid="client"
-  rightsourceip=10.0.0.0/24
-  rightdns=<dns server IPv4>
+  right=<remote IPv4 address>
+  rightsubnet=10.192.0.0/24
+  rightauth=pubkey
+  rightid="<remote cn>"

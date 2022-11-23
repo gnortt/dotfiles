@@ -1,0 +1,26 @@
+config setup
+
+conn ios
+  auto=add
+  compress=no
+  type=tunnel
+  keyexchange=ikev2
+  fragmentation=yes
+  forceencaps=yes
+  ike=aes256-sha256-modp2048
+  esp=aes256-sha256
+  dpdaction=clear
+
+  left=%any
+  leftsubnet=0.0.0.0/0
+  leftid="<server cn>"
+  leftsendcert=always
+  leftcert=/etc/ipsec.d/certs/<server certificate file>
+  leftauth=pubkey
+
+  right=%any
+  rightauth=eap-tls
+  rightsendcert=never
+  rightid="<client cn>"
+  rightsourceip=10.192.0.0/24
+  rightdns=<dns server IPv4>
