@@ -14,14 +14,16 @@ domain-needed
 bogus-priv
 localise-queries
 
-dhcp-range=lan,10.0.0.100,10.0.0.250,255.255.255.0,24h
-dhcp-option=lan,option:router,10.0.0.1
-dhcp-option=lan,option:dns-server,10.0.0.1
-dhcp-option=lan,option:ntp-server,10.0.0.1
+domain=lan,10.0.0.0/24
 
-dhcp-range=lan,::1,constructor:enp2s0,ra-names,ra-stateless,24h
-dhcp-option=lan,option6:dns-server,[<server IPv6 address>]
-dhcp-option=lan,option6:ntp-server,[<server IPv6 address>]
+dhcp-range=set:lan,10.0.0.100,10.0.0.250,255.255.255.0,24h
+dhcp-option=tag:lan,option:router,10.0.0.1
+dhcp-option=tag:lan,option:dns-server,10.0.0.1
+dhcp-option=tag:lan,option:ntp-server,10.0.0.1
+
+dhcp-range=set:lan,::1,constructor:enp2s0,ra-names,ra-stateless,24h
+dhcp-option=tag:lan,option6:dns-server,[<server IPv6 address>]
+dhcp-option=tag:lan,option6:ntp-server,[<server IPv6 address>]
 
 dhcp-leasefile=/var/tmp/dnsmasq.leases
 #conf-file=/etc/dnsmasq.hosts
